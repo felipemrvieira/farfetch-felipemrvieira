@@ -3,12 +3,14 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
+import FutureLaunches from "../components/FutureLaunches";
+import PastLaunches from "../components/PastLaunches";
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Farfetch - @felipemrvieira</title>
+        <title>Launches - Farfetch - @felipemrvieira</title>
         <meta
           name="description"
           content="Farfetch challenge - @felipemrvieira"
@@ -17,13 +19,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Farfetch Challenge{" "}
-          <a href="https://github.com/felipemrvieira">@felipemrvieira</a>
-        </h1>
-        <Link href="/launches" passHref={true}>
-          <p>Afivele os sintos</p>
-        </Link>
+        <h1 className={styles.title}>Launches</h1>
+        <PastLaunches />
+        <FutureLaunches />
       </main>
 
       <footer className={styles.footer}>
