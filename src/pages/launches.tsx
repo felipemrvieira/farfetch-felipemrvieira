@@ -3,10 +3,42 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-import FutureLaunches from "../components/FutureLaunches";
-import PastLaunches from "../components/PastLaunches";
+import Launches from "../components/Launches";
 
 const Home: NextPage = () => {
+  const pastLaunchesData = [
+    {
+      id: 1,
+      missionName: "FalconSat",
+      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
+      launchDate: "2019-01-01",
+      launchSite: "VAFB",
+    },
+    {
+      id: 2,
+      missionName: "FalconSat",
+      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
+      launchDate: "2019-01-01",
+      launchSite: "VAFB",
+    },
+  ];
+
+  const futureLaunchesData = [
+    {
+      id: 1,
+      missionName: "Future FalconSat",
+      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
+      launchDate: "2019-01-01",
+      launchSite: "VAFB",
+    },
+    {
+      id: 2,
+      missionName: "Future FalconSat",
+      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
+      launchDate: "2019-01-01",
+      launchSite: "VAFB",
+    },
+  ];
   return (
     <div className={styles.container}>
       <Head>
@@ -20,8 +52,8 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Launches</h1>
-        <PastLaunches />
-        <FutureLaunches />
+        <Launches title="Past Launches" launchList={pastLaunchesData} />
+        <Launches title="Future Launches" launchList={futureLaunchesData} />
       </main>
 
       <footer className={styles.footer}>
