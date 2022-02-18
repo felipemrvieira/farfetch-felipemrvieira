@@ -5,40 +5,21 @@ import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import Launches from "../components/Launches";
 
-const Home: NextPage = () => {
-  const pastLaunchesData = [
-    {
-      id: 1,
-      missionName: "FalconSat",
-      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
-      launchDate: "2019-01-01",
-      launchSite: "VAFB",
-    },
-    {
-      id: 2,
-      missionName: "FalconSat",
-      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
-      launchDate: "2019-01-01",
-      launchSite: "VAFB",
-    },
-  ];
+export async function getStaticProps() {
+  const pastResponse = await fetch(
+    "https://api.spacexdata.com/v3/launches/past"
+  );
+  const pastLaunchData = await pastResponse.json();
 
-  const futureLaunchesData = [
-    {
-      id: 1,
-      missionName: "Future FalconSat",
-      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
-      launchDate: "2019-01-01",
-      launchSite: "VAFB",
-    },
-    {
-      id: 2,
-      missionName: "Future FalconSat",
-      missionPatch: "https://images2.imgbox.com/e1/e5/N51e3mCq_o.png",
-      launchDate: "2019-01-01",
-      launchSite: "VAFB",
-    },
-  ];
+  const upcomingResponse = await fetch(
+    "https://api.spacexdata.com/v3/launches/upcoming"
+  );
+  const upcomingLaunchData = await upcomingResponse.json();
+
+  return { props: { pastLaunchData, upcomingLaunchData } };
+}
+
+const Home: NextPage = ({ pastLaunchData, upcomingLaunchData }: any) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -52,8 +33,9 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Launches</h1>
-        <Launches title="Past Launches" launchList={pastLaunchesData} />
-        <Launches title="Future Launches" launchList={futureLaunchesData} />
+
+        <Launches title="Past Launches" launchList={pastLaunchData} />
+        <Launches title="Upcoming Launches" launchList={upcomingLaunchData} />
       </main>
 
       <footer className={styles.footer}>
