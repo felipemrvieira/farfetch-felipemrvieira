@@ -16,7 +16,13 @@ export async function getStaticProps() {
   );
   const upcomingLaunchData = await upcomingResponse.json();
 
-  return { props: { pastLaunchData, upcomingLaunchData } };
+  return {
+    props: {
+      pastLaunchData,
+      upcomingLaunchData,
+    },
+    revalidate: 3600,
+  };
 }
 
 const Home: NextPage = ({ pastLaunchData, upcomingLaunchData }: any) => {
