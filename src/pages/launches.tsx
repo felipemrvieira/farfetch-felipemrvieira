@@ -8,18 +8,36 @@ import Filter from "../components/Filter";
 import Launches from "../components/Launches";
 
 export async function getStaticProps() {
-  const response = await fetch("https://api.spacexdata.com/v3/launches");
-  const launchData = await response.json();
+  const pastResponse = await fetch(
+    "https://api.spacexdata.com/v3/launches/past?limit=4&offset=0"
+  );
+  const pastLaunchData = await pastResponse.json();
+  const pastLaunchDataSize = pastResponse.headers.get("spacex-api-count");
+
+  const upcomingResponse = await fetch(
+    "https://api.spacexdata.com/v3/launches/upcoming?limit=4&offset=0"
+  );
+  const upcomingLaunchData = await upcomingResponse.json();
+  const upcomingLaunchDataSize =
+    upcomingResponse.headers.get("spacex-api-count");
 
   return {
     props: {
-      launchData,
+      pastLaunchData,
+      pastLaunchDataSize,
+      upcomingLaunchData,
+      upcomingLaunchDataSize,
     },
     revalidate: 3600,
   };
 }
 
-const Home: NextPage = ({ launchData }: any) => {
+const Home: NextPage = ({
+  pastLaunchData,
+  upcomingLaunchData,
+  pastLaunchDataSize,
+  upcomingLaunchDataSize,
+}: any) => {
   const [success, setSuccess] = useState(true);
   const [failure, setFailure] = useState(true);
   const [past, setPast] = useState(true);
@@ -46,14 +64,14 @@ const Home: NextPage = ({ launchData }: any) => {
     console.log(date);
   }
 
-  const pastLaunch = launchData.filter(function (el: any) {
+  const pastLaunch = pastLaunchData.filter(function (el: any) {
     return success && failure
       ? (el.upcoming === false && el.launch_success === true) ||
           (el.upcoming === false && el.launch_success === false)
       : el.upcoming === false && el.launch_success === success;
   });
 
-  const upcomingLanch = launchData.filter(function (el: any) {
+  const upcomingLanch = upcomingLaunchData.filter(function (el: any) {
     return el.upcoming === true && el.launch_success == undefined;
   });
 
@@ -85,9 +103,21 @@ const Home: NextPage = ({ launchData }: any) => {
         />
 
         <div className={styles.launches}>
-          {past && <Launches title="Past Launches" launchList={pastLaunch} />}
+          {past && (
+            <Launches
+              title="Past Launches"
+              launchList={pastLaunch}
+              path="past"
+              spacexApiCount={pastLaunchDataSize}
+            />
+          )}
           {upcoming && (
-            <Launches title="Upcoming Launches" launchList={upcomingLanch} />
+            <Launches
+              title="Upcoming Launches"
+              launchList={upcomingLanch}
+              path="upcoming"
+              spacexApiCount={upcomingLaunchDataSize}
+            />
           )}
         </div>
       </main>

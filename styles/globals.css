@@ -19,3 +19,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.infinite-scroll-component__outerdiv {
+  width: 100%;
+}
+
+.infinite-scroll-component {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
