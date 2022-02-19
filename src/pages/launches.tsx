@@ -40,8 +40,10 @@ const Home: NextPage = ({ pastLaunchData, upcomingLaunchData }: any) => {
       <main className={styles.main}>
         <h1 className={styles.title}>Launches</h1>
 
-        <Launches title="Past Launches" launchList={pastLaunchData} />
-        <Launches title="Upcoming Launches" launchList={upcomingLaunchData} />
+        <div className={styles.launches}>
+          <Launches title="Past Launches" launchList={pastLaunchData} />
+          <Launches title="Upcoming Launches" launchList={upcomingLaunchData} />
+        </div>
       </main>
 
       <footer className={styles.footer}>

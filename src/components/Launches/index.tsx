@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import Card from "../Card";
 import style from "./launches.module.scss";
 
 interface Props {
@@ -27,38 +27,26 @@ interface Launch {
 
 const Launches: React.FC<Props> = ({ title, launchList }) => {
   return (
-    <>
+    <div className={style.launchesWrapper}>
       <h2 className={style.header}>{title}</h2>
-      {launchList &&
-        launchList.map((launch) => (
-          <div
-            className={style.launch}
-            key={launch.flight_number + launch.launch_date_unix}
-          >
-            <div className={style.mission}>
-              <h4>
-                {launch.mission_name} - {launch.launch_year}
-              </h4>
-              <p>Rocket: {launch.rocket.rocket_name}</p>
-              <p>
-                Mission Status:{" "}
-                {launch.launch_success == undefined
-                  ? "Not launched yet"
-                  : launch.launch_success
-                  ? "Success"
-                  : "Failure"}
-              </p>
-              <img
-                src={launch.links.mission_patch_small}
-                alt={launch.mission_name}
-                width="100"
-                height="100"
-              />
-            </div>
-            <hr />
-          </div>
-        ))}
-    </>
+      <div className={style.launchesList}>
+        {launchList &&
+          launchList.map((launch) => (
+            <Card
+              key={launch.flight_number + launch.launch_date_unix}
+              flight_number={launch.flight_number}
+              launch_date_unix={launch.launch_date_unix}
+              launch_year={launch.launch_year}
+              mission_name={launch.mission_name}
+              launch_success={launch.launch_success}
+              launch_date={launch.launch_date}
+              launch_site={launch.launch_site}
+              rocket_name={launch.rocket.rocket_name}
+              mission_patch_small={launch.links.mission_patch_small}
+            />
+          ))}
+      </div>
+    </div>
   );
 };
 
