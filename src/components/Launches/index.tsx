@@ -55,50 +55,45 @@ const Launches: React.FC<Props> = ({
     setLaunches((launches) => [...launches, ...newLaunches]);
   };
 
-  const filteredLaunches = launches.filter(function (el: any) {
+  const filteredByDateLaunches = launches.filter(function (el: any) {
     return (
       new Date(el.launch_date_utc) >= new Date(dateStartRange) &&
       new Date(el.launch_date_utc) <= new Date(dateEndRange)
     );
   });
-  // const filteredLaunches = launches.filter(function (el: any) {
-  //   if (success && failure) {
-  //     return (
-  //       (el.launch_date_unix >=
-  //         Math.floor(new Date(dateStartRange.toString()).getTime() / 1000) &&
-  //         el.launch_date_unix <=
-  //           Math.floor(new Date(dateEndRange.toString()).getTime() / 1000) &&
-  //         el.launch_success === true) ||
-  //       el.launch_success === false ||
-  //       el.launch_success == undefined
-  //     );
-  //   } else if (!success && !failure) {
-  //     return el.launch_success == undefined;
-  //   } else if (success && !failure) {
-  //     return el.launch_success === true;
-  //   } else if (!success && failure) {
-  //     return el.launch_success === false;
-  //   }
-  // });
+
+  const filteredLaunches = filteredByDateLaunches.filter(function (el: any) {
+    if (success && failure) {
+      return (
+        (el.launch_date_unix >=
+          Math.floor(new Date(dateStartRange.toString()).getTime() / 1000) &&
+          el.launch_date_unix <=
+            Math.floor(new Date(dateEndRange.toString()).getTime() / 1000) &&
+          el.launch_success === true) ||
+        el.launch_success === false ||
+        el.launch_success == undefined
+      );
+    } else if (!success && !failure) {
+      return el.launch_success == undefined;
+    } else if (success && !failure) {
+      return el.launch_success === true;
+    } else if (!success && failure) {
+      return el.launch_success === false;
+    }
+  });
 
   function hasMoreData() {
-    return filteredLaunches.length === 0
-      ? false
-      : filteredLaunches.length < spacexApiCount;
+    return launches.length === 0 ? false : launches.length < spacexApiCount;
   }
 
   return (
     <div className={style.launchesWrapper}>
       <h2 className={style.header}>{title}</h2>
 
-      <p>{dateStartRange}</p>
-      <p>{dateEndRange}</p>
-      {String(dateStartRange < dateEndRange)}
-
       <div className={style.launchesList}>
         <InfiniteScroll
-          scrollThreshold={1}
-          dataLength={filteredLaunches.length}
+          scrollThreshold={0.8}
+          dataLength={launches.length}
           next={getMoreLaunchs}
           hasMore={hasMoreData()}
           loader={<Notify>Loading more launches...</Notify>}

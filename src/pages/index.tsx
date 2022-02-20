@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
+import Notify from "../components/Notify";
 
 const Home: NextPage = () => {
   return (
@@ -22,19 +23,17 @@ const Home: NextPage = () => {
           <a href="https://github.com/felipemrvieira">@felipemrvieira</a>
         </h1>
         <Link href="/launches" passHref={true}>
-          <p>Afivele os sintos</p>
+          <a>
+            <Notify>Fasten your seat belts</Notify>
+          </a>
         </Link>
+        <p className={styles.codebase}>
+          The codebase for this project can be seen{" "}
+          <a href="https://github.com/felipemrvieira/farfetch-felipemrvieira">
+            here
+          </a>
+        </p>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://github.com/felipemrvieira"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Farfetch - @felipemrvieira
-        </a>
-      </footer>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const Home: NextPage = ({
   const [failure, setFailure] = useState(true);
   const [past, setPast] = useState(true);
   const [upcoming, setUpcoming] = useState(true);
-  const [dateStartRange, setDateStartRange] = useState(new Date(2010, 0, 1));
+  const [dateStartRange, setDateStartRange] = useState(new Date(2000, 0, 1));
   const [dateEndRange, setDateEndRange] = useState(new Date(2022, 0, 1));
 
   function handleSuccessChange(event: any) {

@@ -54,16 +54,16 @@ const Launches = ({
             className={style.missionPatch}
             src={mission_patch_small}
             alt={mission_name}
-            width="150"
-            height="150"
+            width="125"
+            height="125"
           />
-          <br />
+          {/* <br />
           {launch_date_unix}
           <br />
           {launch_date_utc}
           <br />
           {launch_date}
-          <br />
+          <br /> */}
           <div className={style.missionTitle}>
             <span>Mission</span>
             <p>
