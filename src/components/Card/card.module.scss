@@ -10,6 +10,16 @@
   border-radius: 15px;
   .mission {
     text-align: center;
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .favorite {
+        color: #461658;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
     .missionPatch {
       max-width: 100%;
     }

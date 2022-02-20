@@ -61,3 +61,22 @@
   flex-direction: row;
   justify-content: space-around;
 }
+
+.favorites {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+
+  color: white;
+  font-weight: bold;
+  box-shadow: inset 0px 7px 10px -6px #dedede;
+  padding: 14px 22px;
+  border-radius: 12px;
+  background-color: #923cb5;
+  background-image: linear-gradient(147deg, #461658 0%, #0f0020 74%);
+  position: fixed;
+  right: 36px;
+  z-index: 99;
+}

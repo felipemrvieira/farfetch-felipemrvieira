@@ -6,6 +6,7 @@ import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import Filter from "../components/Filter";
 import Launches from "../components/Launches";
+import StarIcon from "@mui/icons-material/Star";
 
 export async function getStaticProps() {
   const pastResponse = await fetch(
@@ -42,7 +43,8 @@ const Home: NextPage = ({
   const [failure, setFailure] = useState(true);
   const [past, setPast] = useState(true);
   const [upcoming, setUpcoming] = useState(true);
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [dateStartRange, setDateStartRange] = useState(new Date(2010, 0, 1));
+  const [dateEndRange, setDateEndRange] = useState(new Date(2022, 0, 1));
 
   function handleSuccessChange(event: any) {
     const target = event.target;
@@ -60,8 +62,14 @@ const Home: NextPage = ({
     const target = event.target;
     setUpcoming(target.checked);
   }
-  function handleDateRangeChange(date: any) {
+
+  function handleStartDateChange(date: any) {
     console.log(date);
+    setDateStartRange(date);
+  }
+  function handleEndDateChange(date: any) {
+    console.log(date);
+    setDateEndRange(date);
   }
 
   const pastLaunch = pastLaunchData.filter(function (el: any) {
@@ -87,6 +95,12 @@ const Home: NextPage = ({
       </Head>
 
       <main className={styles.main}>
+        <div>
+          <span className={styles.favorites}>
+            Favorites
+            <StarIcon />
+          </span>
+        </div>
         <h1 className={styles.title}>Launches</h1>
 
         <Filter
@@ -98,8 +112,10 @@ const Home: NextPage = ({
           upcoming={upcoming}
           handlePastChange={handlePastChange}
           handleUpcomingChange={handleUpcomingChange}
-          dateRange={dateRange}
-          handleDateRangeChange={handleDateRangeChange}
+          dateStartRange={dateStartRange.toString()}
+          dateEndRange={dateEndRange.toString()}
+          handleStartDateChange={handleStartDateChange}
+          handleEndDateChange={handleEndDateChange}
         />
 
         <div className={styles.launches}>
@@ -109,6 +125,10 @@ const Home: NextPage = ({
               launchList={pastLaunch}
               path="past"
               spacexApiCount={pastLaunchDataSize}
+              success={success}
+              failure={failure}
+              dateStartRange={dateStartRange.toString()}
+              dateEndRange={dateEndRange.toString()}
             />
           )}
           {upcoming && (
@@ -117,6 +137,10 @@ const Home: NextPage = ({
               launchList={upcomingLanch}
               path="upcoming"
               spacexApiCount={upcomingLaunchDataSize}
+              success={success}
+              failure={failure}
+              dateStartRange={dateStartRange.toString()}
+              dateEndRange={dateEndRange.toString()}
             />
           )}
         </div>

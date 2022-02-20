@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./filter.module.scss";
-import { DateRangePicker } from "rsuite";
+import { DatePicker } from "rsuite";
 
 interface Props {
   success: boolean;
@@ -11,8 +11,11 @@ interface Props {
   upcoming: boolean;
   handlePastChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleUpcomingChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  dateRange: any;
+  dateStartRange: string;
+  dateEndRange: string;
   handleDateRangeChange: any;
+  handleStartDateChange: (date: any) => void;
+  handleEndDateChange: (date: any) => void;
 }
 
 const Filter = ({
@@ -24,14 +27,16 @@ const Filter = ({
   upcoming,
   handlePastChange,
   handleUpcomingChange,
-  dateRange,
-  handleDateRangeChange,
+  dateStartRange,
+  dateEndRange,
+  handleStartDateChange,
+  handleEndDateChange,
 }: Props) => {
   return (
     <div className={style.box}>
       <div className={style.content}>
         <label>
-          Success
+          Successful mission
           <input
             name="isGoing"
             type="checkbox"
@@ -40,7 +45,7 @@ const Filter = ({
           />
         </label>
         <label>
-          Failure
+          Failed mission
           <input
             name="isGoing"
             type="checkbox"
@@ -49,7 +54,7 @@ const Filter = ({
           />
         </label>
         <label>
-          Past
+          Past missions
           <input
             name="isGoing"
             type="checkbox"
@@ -58,7 +63,7 @@ const Filter = ({
           />
         </label>
         <label>
-          Upcoming
+          Upcoming missions
           <input
             name="isGoing"
             type="checkbox"
@@ -66,11 +71,21 @@ const Filter = ({
             onChange={handleUpcomingChange}
           />
         </label>
-        <DateRangePicker
+        <DatePicker
+          value={new Date(dateStartRange)}
+          format="yyyy-MM-dd HH:mm:ss"
+          onChange={(range) => handleStartDateChange(range)}
+        />
+        <DatePicker
+          value={new Date(dateEndRange)}
+          format="yyyy-MM-dd HH:mm:ss"
+          onChange={(range) => handleEndDateChange(range)}
+        />
+        {/* <DateRangePicker
           format="yyyy-MM-dd HH:mm:ss"
           value={dateRange}
           onChange={(range) => handleDateRangeChange(range)}
-        />
+        /> */}
       </div>
     </div>
   );
