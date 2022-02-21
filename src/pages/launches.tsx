@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/Home.module.scss";
 import Filter from "../components/Filter";
 import Launches from "../components/Launches";
 import StarIcon from "@mui/icons-material/Star";
@@ -146,6 +146,13 @@ const Home: NextPage = ({
             </div>
           </Modal>
         </div>
+        <img
+          className="{style.missionPatch}"
+          src="spacex-logo.png"
+          alt="spacex logo"
+          width="225"
+          // height="25"
+        />
         <h1 className={styles.title}>Launches</h1>
 
         <Filter
