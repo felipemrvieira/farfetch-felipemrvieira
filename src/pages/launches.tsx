@@ -144,6 +144,8 @@ const Home: NextPage = ({
     }
   };
 
+  console.log(pastLaunchData);
+  console.log(upcomingLaunchData);
   return (
     <div className={styles.container}>
       <Head>
