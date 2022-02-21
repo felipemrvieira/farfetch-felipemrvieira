@@ -45,7 +45,7 @@ const Launches: React.FC<Props> = ({
   dateStartRange,
   dateEndRange,
 }) => {
-  const [launches, setLaunches] = useState(launchList);
+  const [launches, setLaunches] = useState(launchList || []);
 
   const getMoreLaunchs = async () => {
     const res = await fetch(
@@ -110,7 +110,6 @@ const Launches: React.FC<Props> = ({
                 launch_success={launch.launch_success}
                 launch_date={launch.launch_date}
                 launch_date_utc={launch.launch_date_utc}
-                launch_site={launch.launch_site}
                 rocket_name={launch.rocket.rocket_name}
                 mission_patch_small={launch.links.mission_patch_small}
               />

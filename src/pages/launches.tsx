@@ -90,11 +90,14 @@ const Home: NextPage = ({
   const renderFavoriteLaunches = () => {
     if (typeof window !== "undefined") {
       const storedLaunchs = JSON.parse(
-        localStorage.getItem("favoriteLaunches")
+        localStorage.getItem("favoriteLaunches") || "[]"
       );
       if (storedLaunchs) {
         return storedLaunchs.map((launch: any) => (
-          <div className={styles.favoriteItem}>
+          <div
+            className={styles.favoriteItem}
+            key={launch.flight_number + launch.launch_date_unix}
+          >
             <img
               className="{style.missionPatch}"
               src={launch.mission_patch_small}

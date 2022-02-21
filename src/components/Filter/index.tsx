@@ -13,7 +13,6 @@ interface Props {
   handleUpcomingChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   dateStartRange: string;
   dateEndRange: string;
-  handleDateRangeChange: any;
   handleStartDateChange: (date: any) => void;
   handleEndDateChange: (date: any) => void;
 }
