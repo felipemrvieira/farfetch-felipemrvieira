@@ -8,16 +8,15 @@ interface Props {
 }
 
 interface Launch {
-  flight_number: number;
-  launch_date_unix: number;
-  launch_year: string;
-  mission_name: string;
-  launch_success: boolean;
-  launch_date: string;
-  launch_date_utc: string;
-  launch_site: string;
-  rocket_name: string;
-  mission_patch_small: string;
+  flight_number?: number;
+  launch_date_unix?: number;
+  launch_year?: string;
+  mission_name?: string;
+  launch_success?: boolean;
+  launch_date?: string;
+  launch_date_utc?: string;
+  rocket_name?: string;
+  mission_patch_small?: string;
 }
 
 function handleFavoritClick(launch: Launch) {
