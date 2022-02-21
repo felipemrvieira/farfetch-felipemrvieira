@@ -20,6 +20,10 @@ interface Launch {
   mission_patch_small: string;
 }
 
+function handleFavoritClick(launch: Launch) {
+  console.log(launch);
+}
+
 const Launches = ({
   flight_number,
   launch_date_unix,
@@ -47,7 +51,21 @@ const Launches = ({
               </p>
             </div>
             <span className={style.favorite}>
-              <StarIcon />
+              <StarIcon
+                onClick={() =>
+                  handleFavoritClick({
+                    flight_number,
+                    launch_date_unix,
+                    launch_date_utc,
+                    launch_date,
+                    launch_year,
+                    launch_success,
+                    mission_name,
+                    mission_patch_small,
+                    rocket_name,
+                  })
+                }
+              />
             </span>
           </div>
           <img

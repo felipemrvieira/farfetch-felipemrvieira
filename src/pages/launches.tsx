@@ -7,6 +7,7 @@ import styles from "../../styles/Home.module.css";
 import Filter from "../components/Filter";
 import Launches from "../components/Launches";
 import StarIcon from "@mui/icons-material/Star";
+import Modal from "@mui/material/Modal";
 
 export async function getStaticProps() {
   const pastResponse = await fetch(
@@ -45,6 +46,9 @@ const Home: NextPage = ({
   const [upcoming, setUpcoming] = useState(true);
   const [dateStartRange, setDateStartRange] = useState(new Date(2000, 0, 1));
   const [dateEndRange, setDateEndRange] = useState(new Date(2022, 0, 1));
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   function handleSuccessChange(event: any) {
     const target = event.target;
@@ -96,10 +100,20 @@ const Home: NextPage = ({
 
       <main className={styles.main}>
         <div>
-          <span className={styles.favorites}>
+          <span className={styles.favorites} onClick={handleOpen}>
             Favorites
             <StarIcon />
           </span>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <div className={styles.modalContainer}>
+              <p>asd</p>
+            </div>
+          </Modal>
         </div>
         <h1 className={styles.title}>Launches</h1>
 
