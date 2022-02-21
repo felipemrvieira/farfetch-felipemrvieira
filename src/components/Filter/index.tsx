@@ -34,57 +34,67 @@ const Filter = ({
   return (
     <div className={style.box}>
       <div className={style.content}>
-        <label>
-          Successful mission
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={success}
-            onChange={handleSuccessChange}
-          />
-        </label>
-        <label>
-          Failed mission
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={failure}
-            onChange={handleFailureChange}
-          />
-        </label>
-        <label>
-          Past missions
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={past}
-            onChange={handlePastChange}
-          />
-        </label>
-        <label>
-          Upcoming missions
-          <input
-            name="isGoing"
-            type="checkbox"
-            checked={upcoming}
-            onChange={handleUpcomingChange}
-          />
-        </label>
-        <DatePicker
-          value={new Date(dateStartRange)}
-          format="yyyy-MM-dd HH:mm:ss"
-          onChange={(range) => handleStartDateChange(range)}
-        />
-        <DatePicker
-          value={new Date(dateEndRange)}
-          format="yyyy-MM-dd HH:mm:ss"
-          onChange={(range) => handleEndDateChange(range)}
-        />
-        {/* <DateRangePicker
-          format="yyyy-MM-dd HH:mm:ss"
-          value={dateRange}
-          onChange={(range) => handleDateRangeChange(range)}
-        /> */}
+        <div className={style.inputGroup}>
+          <label className={style.label}>Successful Mission</label>
+          <div>
+            <label>
+              Successful
+              <input
+                name="success"
+                type="checkbox"
+                checked={success}
+                onChange={handleSuccessChange}
+              />
+            </label>
+            <label>
+              Failed
+              <input
+                name="failure"
+                type="checkbox"
+                checked={failure}
+                onChange={handleFailureChange}
+              />
+            </label>
+          </div>
+        </div>
+        <div className={style.inputGroup}>
+          <label className={style.label}> Mission Time</label>
+          <div>
+            <label>
+              Past missions
+              <input
+                name="past"
+                type="checkbox"
+                checked={past}
+                onChange={handlePastChange}
+              />
+            </label>
+            <label>
+              Upcoming missions
+              <input
+                name="isGoing"
+                type="checkbox"
+                checked={upcoming}
+                onChange={handleUpcomingChange}
+              />
+            </label>
+          </div>
+        </div>
+        <div className={style.inputGroup}>
+          <label className={style.label}>Launch range</label>
+          <div>
+            <DatePicker
+              value={new Date(dateStartRange)}
+              format="yyyy-MM-dd HH:mm:ss"
+              onChange={(range) => handleStartDateChange(range)}
+            />
+            <DatePicker
+              value={new Date(dateEndRange)}
+              format="yyyy-MM-dd HH:mm:ss"
+              onChange={(range) => handleEndDateChange(range)}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
