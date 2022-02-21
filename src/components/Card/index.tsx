@@ -21,16 +21,18 @@ interface Launch {
 }
 
 function handleFavoritClick(launch: Launch) {
-  console.log(launch);
+  if (typeof window !== "undefined") {
+    const storedLaunchs = JSON.parse(
+      localStorage.getItem("favoriteLaunches") || "[]"
+    );
 
-  const storedLaunchs = JSON.parse(localStorage.getItem("favoriteLaunches"));
-
-  if (storedLaunchs) {
-    const launchs = [...storedLaunchs, launch];
-    localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
-  } else {
-    const launchs = [launch];
-    localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
+    if (storedLaunchs) {
+      const launchs = [...storedLaunchs, launch];
+      localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
+    } else {
+      const launchs = [launch];
+      localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
+    }
   }
 
   // localStorage.removeItem("favoriteLaunches");
