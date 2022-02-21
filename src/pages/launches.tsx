@@ -87,6 +87,34 @@ const Home: NextPage = ({
     return el.upcoming === true && el.launch_success == undefined;
   });
 
+  const renderFavoriteLaunches = () => {
+    if (typeof window !== "undefined") {
+      const storedLaunchs = JSON.parse(
+        localStorage.getItem("favoriteLaunches")
+      );
+      if (storedLaunchs) {
+        return storedLaunchs.map((launch: any) => (
+          <div className={styles.favoriteItem}>
+            <img
+              className="{style.missionPatch}"
+              src={launch.mission_patch_small}
+              alt={launch.mission_name}
+              width="25"
+              height="25"
+            />
+            <span>Flight Number: {launch.flight_number}</span>
+            <br />
+            <span>Mission Name: {launch.mission_name}</span>
+            <span>{launch.flight_number}</span>
+            <hr />
+          </div>
+        ));
+      } else {
+        return <div>No favorites</div>;
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -111,7 +139,7 @@ const Home: NextPage = ({
             aria-describedby="modal-modal-description"
           >
             <div className={styles.modalContainer}>
-              <p>asd</p>
+              {renderFavoriteLaunches()}
             </div>
           </Modal>
         </div>
