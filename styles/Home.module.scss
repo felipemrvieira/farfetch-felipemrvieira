@@ -115,6 +115,9 @@
   margin-top: auto;
   margin-bottom: auto;
   width: 50%;
+  @media screen and (max-width: 900px) {
+    width: 85%;
+  }
   max-height: fit-content;
   background-color: #dedede;
   padding: 32px;

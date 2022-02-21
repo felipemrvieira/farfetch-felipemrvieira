@@ -117,7 +117,7 @@ const Home: NextPage = ({
       const storedLaunchs = JSON.parse(
         localStorage.getItem("favoriteLaunches") || "[]"
       );
-      if (storedLaunchs) {
+      if (storedLaunchs.length > 0) {
         return storedLaunchs.map((launch: any) => (
           <div
             className={styles.favoriteItem}
