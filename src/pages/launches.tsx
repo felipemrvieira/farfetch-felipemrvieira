@@ -8,6 +8,7 @@ import Filter from "../components/Filter";
 import Launches from "../components/Launches";
 import StarIcon from "@mui/icons-material/Star";
 import Modal from "@mui/material/Modal";
+import { ToastContainer, toast } from "react-toastify";
 
 export async function getStaticProps() {
   const pastResponse = await fetch(
@@ -87,6 +88,30 @@ const Home: NextPage = ({
     return el.upcoming === true && el.launch_success == undefined;
   });
 
+  const removeItem = (item: any) => {
+    if (typeof window !== "undefined") {
+      const storedLaunchs = JSON.parse(
+        localStorage.getItem("favoriteLaunches") || "[]"
+      );
+      if (storedLaunchs) {
+        const launchs = storedLaunchs.filter(
+          (el: any) => el.mission_name !== item.mission_name
+        );
+        localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
+        setOpen(false);
+        toast.success("Launch removed from favorites!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
+  };
+
   const renderFavoriteLaunches = () => {
     if (typeof window !== "undefined") {
       const storedLaunchs = JSON.parse(
@@ -97,6 +122,7 @@ const Home: NextPage = ({
           <div
             className={styles.favoriteItem}
             key={launch.flight_number + launch.launch_date_unix}
+            onClick={() => removeItem(launch)}
           >
             <img
               className="{style.missionPatch}"
