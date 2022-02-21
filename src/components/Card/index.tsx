@@ -2,6 +2,7 @@ import React from "react";
 import Zoom from "react-reveal/Zoom";
 import style from "./card.module.scss";
 import StarIcon from "@mui/icons-material/Star";
+import { ToastContainer, toast } from "react-toastify";
 
 interface Props {
   launch: Launch;
@@ -32,6 +33,15 @@ function handleFavoritClick(launch: Launch) {
       const launchs = [launch];
       localStorage.setItem("favoriteLaunches", JSON.stringify(launchs));
     }
+    toast.success("Launch added to favorites!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   // localStorage.removeItem("favoriteLaunches");
